@@ -30,7 +30,7 @@ public class UserService {
 				return HttpStatus.ACCEPTED; 
 			} 
 			else { 
-				throw new GenericException("-- Invalid Username or Password ---");
+				throw new GenericException("Invalid Username or Password");
 				//throw new InvalidUsernamePasswordException("Invalid Username or Password"); 
 			} 
 		}
