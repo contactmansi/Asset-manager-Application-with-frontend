@@ -31,17 +31,17 @@ public class Controller {
 
 	@Autowired
 	public EmployeeService employeeService;
-	
+
 	@Autowired
 	public AssetService assetService;
-	
+
 	//UPDATE ASSET
 	@PutMapping("/updateasset")
 	public ResponseEntity updateAsset(@RequestBody AssetDto asset) {
 		assetService.updateAsset(asset);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	//View list of assets
 	@RequestMapping("/viewassetlist")
 	public ResponseEntity viewAssetList(@RequestParam(required=false) String assetId, 
@@ -49,19 +49,28 @@ public class Controller {
 		Object list = assetService.viewAssetList(assetId,employeeId);
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
-	
+
 	//Add Asset
 	@PostMapping("/addasset")
 	public ResponseEntity addAsset(@RequestBody AssetDto asset) {
 		assetService.addAsset(asset);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-	
+
+	//Add Employee
+	@GetMapping("/addemployee")
+	public String showaddEmployee() {
+		/*employeeService.addEmployee(employee);
+		return new ResponseEntity<>(HttpStatus.CREATED);*/
+		return "addEmployee";
+	}
+
 	//Add Employee
 	@PostMapping("/addemployee")
-	public ResponseEntity addEmployee(@RequestBody EmployeeDto employee) {
-		employeeService.addEmployee(employee);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	public String addEmployee(@RequestBody EmployeeDto employee) {
+		/*employeeService.addEmployee(employee);
+			return new ResponseEntity<>(HttpStatus.CREATED);*/
+		return "addEmployee";
 	}
 
 	//Login
@@ -71,7 +80,7 @@ public class Controller {
 		HttpStatus response = userService.loginUser(user);
 		System.out.println(response);
 		return new ResponseEntity<HttpStatus>(response);
-		
+
 		/*try {
 			userService.loginUser(user);
 			//System.out.println("---------- Processed loginUser service -------");
