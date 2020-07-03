@@ -28,10 +28,6 @@ public class ErrorController extends ResponseEntityExceptionHandler {
 		return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	/*@ExceptionHandler(InvalidUsernamePasswordException.class)
-	public final ResponseEntity handleIUPException(InvalidUsernamePasswordException ex, WebRequest request){
-		return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
-	}*/
 	
 	@ExceptionHandler(GenericException.class)
 	public final ResponseEntity handleGenericException(GenericException ex, WebRequest request){

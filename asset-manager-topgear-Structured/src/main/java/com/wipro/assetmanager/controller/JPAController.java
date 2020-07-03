@@ -7,8 +7,11 @@ import com.wipro.assetmanager.service.EmployeeService;
 import com.wipro.assetmanager.service.UserService;
 import com.wipro.assetmanager.dto.UserDto;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -40,36 +43,19 @@ public class JPAController {
 	@Autowired
 	public AssetService assetService;
 
-	/*
-	 * @InitBinder public void initBinder(WebDataBinder binder) { // Date -
-	 * dd/MM/yyyy SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	 * binder.registerCustomEditor(Date.class, new CustomDateEditor( dateFormat,
-	 * false)); }
-	 */
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		// Date - dd/MM/yyyy
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, false));
+	}
 
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+	@GetMapping("/login") 
 	public String showLoginPage(ModelMap model){
 		return "login";
 	}
 
-
-	/*  @RequestMapping(value="/login", method = RequestMethod.POST) public String
-	  showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam
-	  String password){
-
-	  boolean isValidUser = service.validateUser(name, password);
-
-	  if (!isValidUser) { 
-	  model.put("errorMessage", "Invalid Credentials"); 
-	  return "login"; }
-
-	  model.put("name", name); model.put("password", password);
-
-	  return "welcome"; 
-	  }*/
-
-
-	//@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@PostMapping("/login")   
 	public String registration(@ModelAttribute("user") UserDto user) {
 
@@ -78,40 +64,30 @@ public class JPAController {
 		System.out.println("----- RESPONSE -------"+response);
 
 		if (!response.equals(HttpStatus.ACCEPTED)) {
-			// model.addAttribute("error", "Your username and password is invalid.");
+			//model.addAttribute("error", "Your username and password is invalid.");
 			return "login";
 		}
 
 		return "home";
 	}
 
-	//Login
-	/*@PostMapping("/login")
-	public String login(ModelMap model, @RequestBody UserDto user) {
-		System.out.println("---------- Sending login input details ------");
-		HttpStatus response = userService.loginUser(user);
-		System.out.println(response);
-		model.put("user", user);
+	@GetMapping("/home") 
+	public String showHome(ModelMap model){
 		return "home";
+	}
+	//Add Employee
+	@GetMapping("/addemployee")
+	public String showAddEmployee(ModelMap model) {
+		model.addAttribute("employee", new EmployeeDto());
+		return "addEmployee";
+	}
 
-		/*try {
-			userService.loginUser(user);
-			//System.out.println("---------- Processed loginUser service -------");
-			return new ResponseEntity<>(HttpStatus.ACCEPTED);
-		}
-		catch(Exception e) {
-			throw new InvalidUsernamePasswordException("------- Invalid Username or Password ----");
-		}*/
-
-
-	/*
-	 * ResponseEntity response =
-	 * Optional.ofNullable(userService.loginUser(user)).orElseThrow(() -> new
-	 * InvalidUsernamePasswordException("------- Invalid Username or Password ----")
-	 * );
-
-
-	}*/
+	//Add Employee
+	@PostMapping("/addemployee")
+	public String addEmployee(@ModelAttribute("employee") EmployeeDto employee) {
+		employeeService.addEmployee(employee);
+		return "redirect:/home";
+	}
 
 	//UPDATE ASSET
 	@PutMapping("/updateasset")
@@ -135,21 +111,7 @@ public class JPAController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	//Add Employee
-	//@GetMapping("/addemployee")
-	@RequestMapping(value = "/addemployee", method = RequestMethod.GET)
-	public String showAddTodoPage(ModelMap model) {
-		//model.addAttribute("addEmployee", new EmployeeDto());
-		return "addEmployee";
-	}
 
-	//Add Employee
-	@PostMapping("/addemployee")
-	public String addEmployee(@RequestBody EmployeeDto employee) {
-		employeeService.addEmployee(employee);
-		//return new ResponseEntity<>(HttpStatus.CREATED);*/
-		return "home";//"redirect:/home"
-	}
 
 
 }

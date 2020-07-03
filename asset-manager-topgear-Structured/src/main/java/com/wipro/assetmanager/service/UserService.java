@@ -2,7 +2,6 @@ package com.wipro.assetmanager.service;
 
 import com.wipro.assetmanager.dto.UserDto;
 import com.wipro.assetmanager.exceptions.GenericException;
-import com.wipro.assetmanager.exceptions.InvalidUsernamePasswordException;
 
 import org.springframework.stereotype.Service;
 
