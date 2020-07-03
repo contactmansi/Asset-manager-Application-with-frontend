@@ -1,0 +1,14 @@
+Input from postman : employeeId: "value"
+
+
+AssetDTO declare:
+	String employeeID
+
+Asset declare:
+	Employee employee
+
+
+AssetMapper:
+Optional.ofNullable(assetDto.getEmployeeId()).ifPresent(
+				employeeID -> model.setEmployeeId(
+						employeeRepository.findById(employeeID).get()));
