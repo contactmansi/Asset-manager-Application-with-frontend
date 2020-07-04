@@ -63,10 +63,10 @@ public class AssetService {
 
 	public Object viewAssetList(String assetId, String employeeId) {
 
-		if(assetId==null && employeeId ==null) //both null
+		if(assetId.isBlank() && employeeId.isBlank()) //both null
 			throw new GenericException("No records found");
 
-		else if(assetId!=null) { // assetId present in inputs
+		else if(!assetId.isBlank()) { // assetId present in inputs
 			Optional<Asset> asset = assetRepository.findById(assetId);
 			if(!asset.isPresent()) {
 				throw new GenericException("No records found");

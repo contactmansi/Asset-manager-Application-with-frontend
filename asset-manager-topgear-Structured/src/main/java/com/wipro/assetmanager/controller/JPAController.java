@@ -57,7 +57,7 @@ public class JPAController {
 	}
 
 	@PostMapping("/login")   
-	public String registration(@ModelAttribute("user") UserDto user) {
+	public String login(@ModelAttribute("user") UserDto user) {
 
 		System.out.println("---------- Sending login input details ------");
 		HttpStatus response = userService.loginUser(user);
@@ -70,11 +70,13 @@ public class JPAController {
 
 		return "home";
 	}
-
+	
+	//HOME
 	@GetMapping("/home") 
 	public String showHome(ModelMap model){
 		return "home";
 	}
+	
 	//Add Employee
 	@GetMapping("/addemployee")
 	public String showAddEmployee(ModelMap model) {
@@ -82,12 +84,27 @@ public class JPAController {
 		return "addEmployee";
 	}
 
-	//Add Employee
 	@PostMapping("/addemployee")
 	public String addEmployee(@ModelAttribute("employee") EmployeeDto employee) {
 		employeeService.addEmployee(employee);
 		return "redirect:/home";
 	}
+		
+	//View list of assets
+	@GetMapping("/viewassetlist")
+	public String showviewAssetList(ModelMap model) {
+		return "viewAssetList";
+	}
+	
+	@PostMapping("/viewassetlist")
+	public String viewAssetList(@ModelAttribute("txtSearchAssetId") String txtSearchAssetId, 
+			@ModelAttribute("txtSearchEmployeeId") String txtSearchEmployeeId, ModelMap model) {
+		
+		Object list = assetService.viewAssetList(txtSearchAssetId,txtSearchEmployeeId);
+		model.addAttribute("assets", list);
+		return "viewAssetList";
+	}
+
 
 	//UPDATE ASSET
 	@PutMapping("/updateasset")
@@ -96,13 +113,7 @@ public class JPAController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	//View list of assets
-	@RequestMapping("/viewassetlist")
-	public ResponseEntity viewAssetList(@RequestParam(required=false) String assetId, 
-			@RequestParam(required=false) String employeeId) {
-		Object list = assetService.viewAssetList(assetId,employeeId);
-		return new ResponseEntity<>(list, HttpStatus.OK);
-	}
+
 
 	//Add Asset
 	@PostMapping("/addasset")
