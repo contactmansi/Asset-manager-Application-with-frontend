@@ -40,7 +40,7 @@
 			<c:forEach items="${assets}" var="asset">
 				<tr>
 
-					<td><a type="button" class="button" href="/updateasset">${asset.assetId}</a></td>
+					<td><a type="button" class="button" href="/updateasset?assetId=${asset.assetId}">${asset.assetId}</a></td>
 					<td>${asset.productName}</td>
 					<td>${asset.modelName}</td>
 					<td>${asset.productColor}</td>

@@ -1,10 +1,14 @@
 package com.wipro.assetmanager.service;
 
+
 import com.wipro.assetmanager.dto.EmployeeDto;
 import com.wipro.assetmanager.exceptions.GenericException;
 import com.wipro.assetmanager.mapper.EmployeeMapper;
 import com.wipro.assetmanager.model.Employee;
 import com.wipro.assetmanager.repository.EmployeeRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -52,6 +56,13 @@ public class EmployeeService {
 			throw new GenericException("Error occurred while saving");
 		}
 
+	}
+
+	public List<Employee> getEmployeeIdList() {
+		List<Employee> list = employeeRepository.findAll();
+		if(list.isEmpty())
+			throw new GenericException("No Employee available. Add Employee first!");
+		return list;
 	}
 
 }

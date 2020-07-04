@@ -3,9 +3,9 @@ package com.wipro.assetmanager.dto;
 
 public class AssetDto {
 
-	private String assetID;
+	private String assetId;
 
-	private String employeeID;
+	private String employeeId;
 
 	private String productName;
 
@@ -28,8 +28,8 @@ public class AssetDto {
 	public AssetDto(String assetId, String employeeId, String productName, String modelName, String productCondition,
 			String productColor, String inUse) {
 		super();
-		this.assetID = assetId;
-		this.employeeID = employeeId;
+		this.assetId = assetId;
+		this.employeeId = employeeId;
 		this.productName = productName;
 		this.modelName = modelName;
 		this.productCondition = productCondition;
@@ -41,13 +41,13 @@ public class AssetDto {
 
 
 	public String getAssetId() {
-		return assetID;
+		return assetId;
 	}
 
 
 
 	public void setAssetId(String assetId) {
-		this.assetID = assetId;
+		this.assetId = assetId;
 	}
 
 
@@ -55,14 +55,14 @@ public class AssetDto {
 
 
 	public String getEmployeeId() {
-		return employeeID;
+		return employeeId;
 	}
 
 
 
 
 	public void setEmployeeId(String employeeId) {
-		this.employeeID = employeeId;
+		this.employeeId = employeeId;
 	}
 
 
@@ -130,7 +130,7 @@ public class AssetDto {
 
 	@Override
 	public String toString() {
-		return "AssetDto [assetId=" + assetID + ", employeeID=" + employeeID + ", productName=" + productName
+		return "AssetDto [assetId=" + assetId + ", employeeId=" + employeeId + ", productName=" + productName
 				+ ", modelName=" + modelName + ", productCondition=" + productCondition + ", productColor="
 				+ productColor + ", inUse=" + inUse + "]";
 	}

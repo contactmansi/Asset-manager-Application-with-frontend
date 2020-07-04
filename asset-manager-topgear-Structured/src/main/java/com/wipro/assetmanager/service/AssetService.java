@@ -45,6 +45,12 @@ public class AssetService {
 	}
 	
 
+	public Object getAssetByID(String assetId) {
+		// TODO Auto-generated method stub
+		Object asset = assetRepository.findById(assetId).get();
+		return asset;
+	}	
+
 	public void updateAsset(AssetDto assetDto) {
 		try {
 			//Mapping
@@ -80,7 +86,7 @@ public class AssetService {
 			 */
 
 
-			if(employeeId!=null) { //EmployeeId also present in inputs
+			if(employeeId.isBlank()) { //EmployeeId also present in inputs
 				if(!asset.get().getEmployeeId().getId().equals(employeeId)) {
 
 					System.out.println("---- Exception from employeeID comparison---"); throw new
@@ -109,7 +115,6 @@ public class AssetService {
 		});
 		return asset.get();		
 
-	}
-		
+	}		
 
 }

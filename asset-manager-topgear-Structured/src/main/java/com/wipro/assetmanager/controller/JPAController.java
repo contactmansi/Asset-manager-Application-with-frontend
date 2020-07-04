@@ -6,9 +6,11 @@ import com.wipro.assetmanager.service.AssetService;
 import com.wipro.assetmanager.service.EmployeeService;
 import com.wipro.assetmanager.service.UserService;
 import com.wipro.assetmanager.dto.UserDto;
+import com.wipro.assetmanager.model.Employee;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -50,6 +52,8 @@ public class JPAController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(
 				dateFormat, false));
 	}
+	
+	//LOGIN
 
 	@GetMapping("/login") 
 	public String showLoginPage(ModelMap model){
@@ -72,12 +76,14 @@ public class JPAController {
 	}
 	
 	//HOME
+	
 	@GetMapping("/home") 
 	public String showHome(ModelMap model){
 		return "home";
 	}
 	
 	//Add Employee
+	
 	@GetMapping("/addemployee")
 	public String showAddEmployee(ModelMap model) {
 		model.addAttribute("employee", new EmployeeDto());
@@ -89,7 +95,40 @@ public class JPAController {
 		employeeService.addEmployee(employee);
 		return "redirect:/home";
 	}
-		
+	
+	//Add Asset
+	
+	@GetMapping("/addasset")
+	public String showAddAsset(ModelMap model) {
+		List<Employee> employeeIdList = employeeService.getEmployeeIdList();
+		model.addAttribute("employeeIdList", employeeIdList);
+		model.addAttribute("asset", new AssetDto());
+		return "asset";
+	}
+	
+	@PostMapping("/addasset")
+	public String addEmployee(@ModelAttribute("asset") AssetDto asset) {
+		assetService.addAsset(asset);;
+		return "redirect:/home";
+	}
+	
+	////UPDATE ASSET /updateasset		
+	@GetMapping("/updateasset")
+	public String showupdateAsset(@RequestParam String assetId, ModelMap model) {
+		Object asset = assetService.getAssetByID(assetId);
+		model.addAttribute("asset", asset);
+		List<Employee> employeeIdList = employeeService.getEmployeeIdList();
+		model.addAttribute("employeeIdList", employeeIdList);
+		return "updateasset";
+	}
+
+	 
+	@PostMapping("/updateasset")
+	public String updateAsset(@ModelAttribute("asset") AssetDto asset) {
+		assetService.updateAsset(asset);
+		return "redirect:/home";
+	}
+	
 	//View list of assets
 	@GetMapping("/viewassetlist")
 	public String showviewAssetList(ModelMap model) {
@@ -106,21 +145,8 @@ public class JPAController {
 	}
 
 
-	//UPDATE ASSET
-	@PutMapping("/updateasset")
-	public ResponseEntity updateAsset(@RequestBody AssetDto asset) {
-		assetService.updateAsset(asset);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
 
-
-
-	//Add Asset
-	@PostMapping("/addasset")
-	public ResponseEntity addAsset(@RequestBody AssetDto asset) {
-		assetService.addAsset(asset);
-		return new ResponseEntity<>(HttpStatus.CREATED);
-	}
+	
 
 
 
