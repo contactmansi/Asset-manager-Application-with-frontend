@@ -1,18 +1,28 @@
 package com.wipro.assetmanager.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class EmployeeDto {
 
+	@NotNull(message = "Employee Id is mandatory field")
+	@Pattern(regexp = "^[A-Za-z0-9]+$", message = "Employee Id should be alpha numeric")
 	private String id;
 	
+	@Pattern(regexp = "^[A-Za-z]*$", message = "Only alphabets allowed")
 	private String surname;
-
+	
+	@NotEmpty(message = "Employee Name is mandatory field")
+	@Pattern(regexp = "^[A-Za-z]*$", message = "Only alphabets allowed")
 	private String name;
 
 	private Long number;
 
+	@Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed")
 	private String location;
 
+	@Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed")
 	private String designation;
 
 	public EmployeeDto() {
@@ -20,7 +30,12 @@ public class EmployeeDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmployeeDto(String id, String surname, String name, Long number, String location, String designation) {
+	public EmployeeDto(
+			@NotNull(message = "Employee Id is mandatory field") @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Employee Id should be alpha numeric") String id,
+			@Pattern(regexp = "^[A-Za-z]*$", message = "Only alphabets allowed") String surname,
+			@NotEmpty(message = "Employee Name is mandatory field") @Pattern(regexp = "^[A-Za-z]*$", message = "Only alphabets allowed") String name,
+			Long number, @Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed") String location,
+			@Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed") String designation) {
 		super();
 		this.id = id;
 		this.surname = surname;
@@ -29,7 +44,9 @@ public class EmployeeDto {
 		this.location = location;
 		this.designation = designation;
 	}
-	
+
+
+
 	public void setId(String id) {
 		this.id = id;
 	}

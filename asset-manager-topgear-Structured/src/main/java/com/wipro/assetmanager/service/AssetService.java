@@ -1,5 +1,6 @@
 package com.wipro.assetmanager.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -67,7 +68,7 @@ public class AssetService {
 		
 	}
 
-	public Object viewAssetList(String assetId, String employeeId) {
+	public List<Asset> viewAssetList(String assetId, String employeeId) {
 
 		if(assetId.isBlank() && employeeId.isBlank()) //both null
 			throw new GenericException("No records found");
@@ -86,14 +87,16 @@ public class AssetService {
 			 */
 
 
-			if(employeeId.isBlank()) { //EmployeeId also present in inputs
+			if(!employeeId.isBlank()) { //EmployeeId also present in inputs
 				if(!asset.get().getEmployeeId().getId().equals(employeeId)) {
 
 					System.out.println("---- Exception from employeeID comparison---"); throw new
 					GenericException("No records found"); }
 
 			}
-			return asset.get();
+			List<Asset> assets = new ArrayList<Asset>();
+			assets.add(asset.get());
+			return assets;
 		}
 		
 		//Only Employee Id in inputs --> return list of assets from Asset Repo

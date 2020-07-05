@@ -18,7 +18,7 @@
 					<fieldset class="form-group">
 						<form:label path="assetId">Asset Id</form:label>
 						<form:input path="assetId" name="txtAssetID"  type="text"
-							class="form-control" required="required" />
+							class="form-control" required="required"/>
 						<form:errors path="assetId" cssClass="error" />
 					</fieldset>
 
