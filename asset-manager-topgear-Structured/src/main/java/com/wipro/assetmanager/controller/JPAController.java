@@ -6,6 +6,7 @@ import com.wipro.assetmanager.service.AssetService;
 import com.wipro.assetmanager.service.EmployeeService;
 import com.wipro.assetmanager.service.UserService;
 import com.wipro.assetmanager.dto.UserDto;
+import com.wipro.assetmanager.exceptions.GenericException;
 import com.wipro.assetmanager.model.Asset;
 import com.wipro.assetmanager.model.Employee;
 
@@ -49,7 +50,7 @@ public class JPAController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(
 				dateFormat, false));
 	}
-	
+
 	//LOGIN
 
 	@GetMapping("/login") 
@@ -58,20 +59,18 @@ public class JPAController {
 	}
 
 	@PostMapping("/login")   
-	public String login(@Valid @ModelAttribute("user") UserDto user) {
+	public String login(@ModelAttribute("user") UserDto user) {
 
-		System.out.println("---------- Sending login input details ------");
-		HttpStatus response = userService.loginUser(user);
-		System.out.println("----- RESPONSE -------"+response);
-
-		if (!response.equals(HttpStatus.ACCEPTED)) {
-			//model.addAttribute("error", "Your username and password is invalid.");
-			return "login";
+		try {
+			HttpStatus response = userService.loginUser(user);
 		}
-
+		catch(RuntimeException e) {
+			System.out.println("---- Error from Controller ----");
+			throw new GenericException(e.getMessage(), "login");
+		}
 		return "home";
 	}
-	
+
 	@ModelAttribute("user")
 	public UserDto user() {
 		return new UserDto();
@@ -83,7 +82,7 @@ public class JPAController {
 	public String showHome(ModelMap model){
 		return "home";
 	}
-	
+
 	@GetMapping("/logout") 
 	public String logout(ModelMap model){
 		return "redirect:/login";
@@ -100,10 +99,14 @@ public class JPAController {
 	@PostMapping("/addemployee")
 	public String addEmployee(@Valid @ModelAttribute("employee") EmployeeDto employee, BindingResult result) {
 		if (result.hasErrors()) {
-
 			return "addEmployee";
 		}
-		employeeService.addEmployee(employee);
+		try {
+			employeeService.addEmployee(employee);
+		}
+		catch(RuntimeException e) {
+			throw new GenericException(e.getMessage(), "addEmployee");
+		}
 		return "redirect:/home";
 	}
 
@@ -111,20 +114,33 @@ public class JPAController {
 
 	@GetMapping("/addasset")
 	public String showAddAsset(ModelMap model) {
-		List<Employee> employeeIdList = employeeService.getEmployeeIdList();
-		model.addAttribute("employeeIdList", employeeIdList);
+		try {
+			List<Employee> employeeIdList = employeeService.getEmployeeIdList();
+			model.addAttribute("employeeIdList", employeeIdList);
+			model.addAttribute("asset", new AssetDto());
+		}
+		catch(RuntimeException e) {
+			throw new GenericException(e.getMessage(), "home");//try home
+		}
 
-		model.addAttribute("asset", new AssetDto());
+		//model.addAttribute("employeeIdList", employeeIdList);
+		//model.addAttribute("asset", new AssetDto());
 		return "asset";
 	}
 
 	@PostMapping("/addasset")
 	public String addEmployee(@Valid @ModelAttribute("asset") AssetDto asset, ModelMap model, BindingResult result) {
-		if (result.hasErrors()) {
-			model.addAttribute("employeeIdList", employeeService.getEmployeeIdList());
-			return "asset";
+
+		try {
+			if (result.hasErrors()) {
+				model.addAttribute("employeeIdList", employeeService.getEmployeeIdList());
+				return "asset";
+			}
+			assetService.addAsset(asset);
 		}
-		assetService.addAsset(asset);
+		catch(RuntimeException e) {
+			throw new GenericException(e.getMessage(), "asset");//try home
+		}
 		return "redirect:/home";
 	}
 
@@ -143,8 +159,9 @@ public class JPAController {
 
 
 	@PostMapping("/updateasset")
-	public String updateAsset(@Valid @ModelAttribute("asset") AssetDto asset, BindingResult result) {
+	public String updateAsset(@Valid @ModelAttribute("asset") AssetDto asset, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
+			model.addAttribute("employeeIdList", employeeService.getEmployeeIdList());
 			return "updateasset";
 		}
 		assetService.updateAsset(asset);
@@ -160,9 +177,16 @@ public class JPAController {
 	@PostMapping("/viewassetlist")
 	public String viewAssetList( @ModelAttribute("txtSearchAssetId") String txtSearchAssetId, 
 			@ModelAttribute("txtSearchEmployeeId") String txtSearchEmployeeId, ModelMap model) {
-
-		List<Asset> assets = assetService.viewAssetList(txtSearchAssetId,txtSearchEmployeeId);
-		model.addAttribute("assets", assets);
+		try {
+			List<Asset> assets = assetService.viewAssetList(txtSearchAssetId,txtSearchEmployeeId);
+			model.addAttribute("assets", assets);
+		}
+		catch(RuntimeException e) {
+			System.out.println("---- Error from JPA Controller ----");
+			throw new GenericException(e.getMessage(), "viewAssetList");
+		}
+		//List<Asset> assets = assetService.viewAssetList(txtSearchAssetId,txtSearchEmployeeId);
+		//model.addAttribute("assets", assets);
 		return "viewAssetList";
 	}
 

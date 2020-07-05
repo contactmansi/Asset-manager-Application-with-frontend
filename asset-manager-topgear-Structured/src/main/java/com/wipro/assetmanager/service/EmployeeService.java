@@ -61,7 +61,7 @@ public class EmployeeService {
 	public List<Employee> getEmployeeIdList() {
 		List<Employee> list = employeeRepository.findAll();
 		if(list.isEmpty())
-			throw new GenericException("No Employee available. Add Employee first!");
+			throw new GenericException("No Employee available. Add Employee first to add asset!");
 		return list;
 	}
 

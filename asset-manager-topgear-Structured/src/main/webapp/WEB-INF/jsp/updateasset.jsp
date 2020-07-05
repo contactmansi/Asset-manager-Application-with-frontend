@@ -10,15 +10,10 @@
 			<div class="panel-body">
 				<form:form method="post" modelAttribute="asset">
 
-					<!-- 	<fieldset class="form-group">
-							<label>Employee Name</label> <input name="txtName" type="text"
-								class="form-control" required="required" />
-						</fieldset> -->
-
 					<fieldset class="form-group">
 						<form:label path="assetId">Asset Id</form:label>
-						<form:input path="assetId" name="txtAssetID"  type="text"
-							class="form-control" required="required"/>
+						<form:input path="assetId" name="txtAssetID" type="text"
+							class="form-control" required="required" />
 						<form:errors path="assetId" cssClass="error" />
 					</fieldset>
 
@@ -69,11 +64,15 @@
 						</form:select>
 						<form:errors path="employeeId" cssClass="error" />
 					</fieldset>
+
 					<button name="btnSave" type="submit" class="btn btn-success">Update
 						Asset</button>
+
+					<c:if test="${not empty errorMessage}">
+						<h4 class="error message">${errorMessage}</h4>
+					</c:if>
+
 				</form:form>
-
-
 			</div>
 		</div>
 	</div>

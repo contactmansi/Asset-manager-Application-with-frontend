@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -28,7 +29,7 @@ public class Asset {
     @JoinColumn(name = "employee", referencedColumnName = "id")
 	private Employee employee;
 
-	@NotNull(message = "Product field is mandatory")
+	@NotBlank(message = "Product field is mandatory")
 	@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Product should be alpha numeric")
 	private String productName;
 

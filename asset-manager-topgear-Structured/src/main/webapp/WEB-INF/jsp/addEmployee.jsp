@@ -56,6 +56,9 @@
 
 					<button name="addEmployee" type="submit" class="btn btn-success">Add
 						Employee</button>
+					<c:if test="${not empty errorMessage}">
+						<h4 class="error message">${errorMessage}</h4>
+					</c:if>	
 				</form:form>
 			</div>
 		</div>

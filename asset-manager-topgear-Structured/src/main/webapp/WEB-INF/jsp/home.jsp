@@ -2,7 +2,7 @@
 <%@ include file="common/navigation.jspf"%>
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3 ">
+		<div class="col-md-7 col-md-offset-3 ">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h2>ASSET MANAGER HOME</h2>
@@ -24,8 +24,11 @@
 						<a class="btn btn-success" id="btnAddAsset" href="/addasset">Add
 							Asset</a>
 					</p>
-
-
+					
+					<c:if test="${not empty errorMessage}">
+						<h4 class="error message">${errorMessage}</h4>
+					</c:if>
+					
 				</div>
 			</div>
 		</div>
