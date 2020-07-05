@@ -65,8 +65,8 @@
 					</fieldset>
 					<button name="btnSave" type="submit" class="btn btn-success">Add
 						Asset</button>
-					<form:errors path="*" cssClass="error message"
-						cssStyle="width: 900px" />
+					<%-- <form:errors path="*" cssClass="error message"
+						cssStyle="width: 900px" /> --%>
 					<c:if test="${not empty errorMessage}">
 						<h4 class="error message">${errorMessage}</h4>
 					</c:if>

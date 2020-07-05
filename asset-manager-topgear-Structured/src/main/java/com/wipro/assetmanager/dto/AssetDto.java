@@ -23,17 +23,17 @@ public class AssetDto {
 	@Size(max=30, message="Only 30 characters allowed")
 	private String productName;
 
-	@NotEmpty(message = "Model field is mandatory")
+	@NotBlank(message = "Model field is mandatory")
 	@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Model should be alpha numeric")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String modelName;
 
-	@NotNull(message = "Condition field is mandatory")
+	@NotBlank(message = "Condition field is mandatory")
 	@Pattern(regexp = "^[A-Za-z ]*$", message = "Condition should be alphabets only")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String productCondition;
 
-	@NotNull(message = "Color field is mandatory")
+	@NotBlank(message = "Color field is mandatory")
 	@Pattern(regexp = "^[A-Za-z ]*$", message = "Color should be alphabets only")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String productColor;

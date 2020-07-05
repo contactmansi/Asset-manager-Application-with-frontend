@@ -129,11 +129,12 @@ public class JPAController {
 	}
 
 	@PostMapping("/addasset")
-	public String addEmployee(@Valid @ModelAttribute("asset") AssetDto asset, ModelMap model, BindingResult result) {
+	public String addAsset(@Valid @ModelAttribute("asset") AssetDto asset, BindingResult result, ModelMap model) {
 
 		try {
 			if (result.hasErrors()) {
 				model.addAttribute("employeeIdList", employeeService.getEmployeeIdList());
+			//	model.addAttribute("asset", new AssetDto());
 				return "asset";
 			}
 			assetService.addAsset(asset);
@@ -160,11 +161,16 @@ public class JPAController {
 
 	@PostMapping("/updateasset")
 	public String updateAsset(@Valid @ModelAttribute("asset") AssetDto asset, BindingResult result, ModelMap model) {
-		if (result.hasErrors()) {
+
+		try{if (result.hasErrors()) {
 			model.addAttribute("employeeIdList", employeeService.getEmployeeIdList());
 			return "updateasset";
 		}
 		assetService.updateAsset(asset);
+		}
+		catch(RuntimeException e) {
+			throw new GenericException(e.getMessage(), "updateasset");//try home
+		}
 		return "redirect:/home";
 	}
 
