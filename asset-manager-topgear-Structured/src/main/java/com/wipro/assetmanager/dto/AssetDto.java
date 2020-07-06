@@ -6,6 +6,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class AssetDto {
 
 	@NotNull(message = "Asset Id is mandatory")
@@ -24,20 +26,21 @@ public class AssetDto {
 	private String productName;
 
 	@NotBlank(message = "Model field is mandatory")
-	@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Model should be alpha numeric")
+	@Pattern(regexp = "^[A-Za-z0-9]*$", message = "Model should be alpha numeric")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String modelName;
 
 	@NotBlank(message = "Condition field is mandatory")
-	@Pattern(regexp = "^[A-Za-z ]*$", message = "Condition should be alphabets only")
+	@Pattern(regexp = "^[A-Za-z]*$", message = "Condition should be alphabets only")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String productCondition;
 
 	@NotBlank(message = "Color field is mandatory")
-	@Pattern(regexp = "^[A-Za-z ]*$", message = "Color should be alphabets only")
+	@Pattern(regexp = "^[A-Za-z]*$", message = "Color should be alphabets only")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String productColor;
-
+	
+	@Value("No")
 	private String inUse;
 
 
@@ -47,12 +50,12 @@ public class AssetDto {
 
 
 	public AssetDto(
-			@NotNull(message = "Asset Id is mandatory") @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Asset Id should be alpha numeric") String assetId,
-			@NotNull(message = "Employee Id is mandatory field") @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Employee Id should be alpha numeric") String employeeId,
-			@NotNull(message = "Product field is mandatory") @Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Product should be alpha numeric") String productName,
-			@NotEmpty(message = "Model field is mandatory") @Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Model should be alpha numeric") String modelName,
-			@NotNull(message = "Condition field is mandatory") @Pattern(regexp = "^[A-Za-z ]*$", message = "Condition should be alphabets only") String productCondition,
-			@NotNull(message = "Color field is mandatory") @Pattern(regexp = "^[A-Za-z ]*$", message = "Color should be alphabets only") String productColor,
+			@NotNull(message = "Asset Id is mandatory") @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Asset Id should be alpha numeric") @Size(max = 30, message = "Only 30 characters allowed") String assetId,
+			@NotNull(message = "Employee Id is mandatory field") @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Employee Id should be alpha numeric") @Size(max = 30, message = "Only 30 characters allowed") String employeeId,
+			@NotBlank(message = "Product field is mandatory") @Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Product should be alpha numeric") @Size(max = 30, message = "Only 30 characters allowed") String productName,
+			@NotBlank(message = "Model field is mandatory") @Pattern(regexp = "^[A-Za-z0-9]*$", message = "Model should be alpha numeric") @Size(max = 30, message = "Only 30 characters allowed") String modelName,
+			@NotBlank(message = "Condition field is mandatory") @Pattern(regexp = "^[A-Za-z]*$", message = "Condition should be alphabets only") @Size(max = 30, message = "Only 30 characters allowed") String productCondition,
+			@NotBlank(message = "Color field is mandatory") @Pattern(regexp = "^[A-Za-z]*$", message = "Color should be alphabets only") @Size(max = 30, message = "Only 30 characters allowed") String productColor,
 			String inUse) {
 		super();
 		this.assetId = assetId;
@@ -63,7 +66,6 @@ public class AssetDto {
 		this.productColor = productColor;
 		this.inUse = inUse;
 	}
-
 
 
 

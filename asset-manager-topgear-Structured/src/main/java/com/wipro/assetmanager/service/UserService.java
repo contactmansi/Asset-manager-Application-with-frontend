@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Service
 public class UserService {
 
-	public HttpStatus loginUser(UserDto user) {
+	public void loginUser(UserDto user) {
 		System.out.println("----------Inside loginUser function block-------");
 
 		if(Objects.nonNull(user) && 
@@ -25,16 +25,15 @@ public class UserService {
 				Optional.ofNullable(user.getPassword()).isPresent()) {
 
 			if(user.getUsername().equalsIgnoreCase("admin") && user.getPassword().equalsIgnoreCase("admin")) {
-				System.out.println("----------Redirection to homepage-------"); 
-				return HttpStatus.ACCEPTED; 
-			} 
-			else { 
-				throw new GenericException("Invalid Username or Password");
-				//throw new InvalidUsernamePasswordException("Invalid Username or Password"); 
-			} 
-		}
 
-		return HttpStatus.NOT_FOUND;
+				System.out.println("----------Redirection to homepage-------"); 
+			} 
+			else
+				throw new GenericException("Invalid Username or Password");
+
+		}
+		else
+			throw new GenericException("Invalid Username or Password");//return HttpStatus.NOT_FOUND;
 	}
 }
 

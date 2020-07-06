@@ -1,6 +1,6 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
-
+<title>Add Employee</title>
 <div class="container">
 	<div class="row">
 		<div class="panel panel-primary">
@@ -9,7 +9,7 @@
 			</div>
 			<div class="panel-body">
 				<form:form method="post" modelAttribute="employee">
-				
+
 					<fieldset class="form-group">
 						<form:label path="id">Employee ID</form:label>
 						<form:input path="id" name="txtEmployeeID" type="text"
@@ -56,9 +56,12 @@
 
 					<button name="addEmployee" type="submit" class="btn btn-success">Add
 						Employee</button>
+					
 					<c:if test="${not empty errorMessage}">
-						<h4 class="error message">${errorMessage}</h4>
-					</c:if>	
+						<div id="errorMsg">
+							<h4 class="error message">${errorMessage}</h4>
+						</div>
+					</c:if>
 				</form:form>
 			</div>
 		</div>

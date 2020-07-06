@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -31,18 +32,22 @@ public class Asset {
 
 	@NotBlank(message = "Product field is mandatory")
 	@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Product should be alpha numeric")
+	@Size(max=30, message="Only 30 characters allowed")
 	private String productName;
 
-	@NotEmpty(message = "Model field is mandatory")
-	@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Model should be alpha numeric")
+	@NotBlank(message = "Model field is mandatory")
+	@Pattern(regexp = "^[A-Za-z0-9]*$", message = "Model should be alpha numeric")
+	@Size(max=30, message="Only 30 characters allowed")
 	private String modelName;
 
-	@NotNull(message = "Condition field is mandatory")
-	@Pattern(regexp = "^[A-Za-z ]*$", message = "Condition should be alphabets only")
+	@NotBlank(message = "Condition field is mandatory")
+	@Pattern(regexp = "^[A-Za-z]*$", message = "Condition should be alphabets only")
+	@Size(max=30, message="Only 30 characters allowed")
 	private String productCondition;
 
-	@NotNull(message = "Color field is mandatory")
-	@Pattern(regexp = "^[A-Za-z ]*$", message = "Color should be alphabets only")
+	@NotBlank(message = "Color field is mandatory")
+	@Pattern(regexp = "^[A-Za-z]*$", message = "Color should be alphabets only")
+	@Size(max=30, message="Only 30 characters allowed")
 	private String productColor;
 
 	//Allow only yes/No values
@@ -58,19 +63,17 @@ public class Asset {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public Asset(
 			@NotNull(message = "Asset Id is mandatory") @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Asset Id should be alpha numeric") String assetId,
-			Employee employeeId,
-			@NotNull(message = "Product field is mandatory") @Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Product should be alpha numeric") String productName,
-			@NotEmpty(message = "Model field is mandatory") @Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Model should be alpha numeric") String modelName,
-			@NotNull(message = "Condition field is mandatory") @Pattern(regexp = "^[A-Za-z ]*$", message = "Condition should be alphabets only") String productCondition,
-			@NotNull(message = "Color field is mandatory") @Pattern(regexp = "^[A-Za-z ]*$", message = "Color should be alphabets only") String productColor,
+			Employee employee,
+			@NotBlank(message = "Product field is mandatory") @Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Product should be alpha numeric") @Size(max = 30, message = "Only 30 characters allowed") String productName,
+			@NotBlank(message = "Model field is mandatory") @Pattern(regexp = "^[A-Za-z0-9]*$", message = "Model should be alpha numeric") @Size(max = 30, message = "Only 30 characters allowed") String modelName,
+			@NotBlank(message = "Condition field is mandatory") @Pattern(regexp = "^[A-Za-z]*$", message = "Condition should be alphabets only") @Size(max = 30, message = "Only 30 characters allowed") String productCondition,
+			@NotBlank(message = "Color field is mandatory") @Pattern(regexp = "^[A-Za-z]*$", message = "Color should be alphabets only") @Size(max = 30, message = "Only 30 characters allowed") String productColor,
 			String inUse, Instant time) {
 		super();
 		this.assetId = assetId;
-		this.employee = employeeId;
+		this.employee = employee;
 		this.productName = productName;
 		this.modelName = modelName;
 		this.productCondition = productCondition;
@@ -78,6 +81,7 @@ public class Asset {
 		this.inUse = inUse;
 		this.time = time;
 	}
+
 
 	public String getAssetId() {
 		return assetId;

@@ -1,5 +1,6 @@
 package com.wipro.assetmanager.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -7,7 +8,7 @@ import javax.validation.constraints.Size;
 
 public class EmployeeDto {
 
-	@NotNull(message = "Employee Id is mandatory field")
+	@NotBlank(message = "Employee Id is mandatory field")
 	@Pattern(regexp = "^[A-Za-z0-9]+$", message = "Employee Id should be alpha numeric")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String id;
@@ -16,18 +17,18 @@ public class EmployeeDto {
 	@Size(max=30, message="Only 30 characters allowed")
 	private String surname;
 	
-	@NotEmpty(message = "Employee Name is mandatory field")
+	@NotBlank(message = "Employee Name is mandatory field")
 	@Pattern(regexp = "^[A-Za-z]*$", message = "Only alphabets allowed")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String name;
 
-	@Size(max=30, message="Only 30 characters allowed")
 	private Long number;
 
 	@Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String location;
 
+	@NotBlank(message = "Designation is mandatory field")
 	@Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed")
 	@Size(max=30, message="Only 30 characters allowed")
 	private String designation;
@@ -37,12 +38,15 @@ public class EmployeeDto {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	public EmployeeDto(
-			@NotNull(message = "Employee Id is mandatory field") @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Employee Id should be alpha numeric") String id,
-			@Pattern(regexp = "^[A-Za-z]*$", message = "Only alphabets allowed") String surname,
-			@NotEmpty(message = "Employee Name is mandatory field") @Pattern(regexp = "^[A-Za-z]*$", message = "Only alphabets allowed") String name,
-			Long number, @Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed") String location,
-			@Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed") String designation) {
+			@NotBlank(message = "Employee Id is mandatory field") @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Employee Id should be alpha numeric") @Size(max = 30, message = "Only 30 characters allowed") String id,
+			@Pattern(regexp = "^[A-Za-z]*$", message = "Only alphabets allowed") @Size(max = 30, message = "Only 30 characters allowed") String surname,
+			@NotBlank(message = "Employee Name is mandatory field") @Pattern(regexp = "^[A-Za-z]*$", message = "Only alphabets allowed") @Size(max = 30, message = "Only 30 characters allowed") String name,
+			Long number,
+			@Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed") @Size(max = 30, message = "Only 30 characters allowed") String location,
+			@NotBlank(message = "Designation is mandatory field") @Pattern(regexp = "^[A-Za-z ]*$", message = "Only alphabets allowed") @Size(max = 30, message = "Only 30 characters allowed") String designation) {
 		super();
 		this.id = id;
 		this.surname = surname;

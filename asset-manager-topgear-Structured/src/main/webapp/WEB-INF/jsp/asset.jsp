@@ -1,6 +1,6 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
-
+<title>Add Asset</title>
 <div class="container">
 	<div class="row">
 		<div class="panel panel-primary">
@@ -49,8 +49,8 @@
 						<form:label path="inUse">In Use</form:label>
 						<form:select path="inUse" name="drpInUse" class="form-control"
 							required="required">
-							<form:option value="Yes" label="Yes" />
 							<form:option value="No" label="No" />
+							<form:option value="Yes" label="Yes" />							
 						</form:select>
 						<form:errors path="inUse" cssClass="error" />
 					</fieldset>
@@ -63,12 +63,14 @@
 						</form:select>
 						<form:errors path="employeeId" cssClass="error" />
 					</fieldset>
+					
 					<button name="btnSave" type="submit" class="btn btn-success">Add
 						Asset</button>
-					<%-- <form:errors path="*" cssClass="error message"
-						cssStyle="width: 900px" /> --%>
+						
 					<c:if test="${not empty errorMessage}">
-						<h4 class="error message">${errorMessage}</h4>
+						<div id="errorMsg">
+							<h4 class="error message">${errorMessage}</h4>
+						</div>
 					</c:if>
 
 				</form:form>

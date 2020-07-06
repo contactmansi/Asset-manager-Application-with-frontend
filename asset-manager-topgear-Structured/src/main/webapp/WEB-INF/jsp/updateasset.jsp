@@ -1,6 +1,6 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
-
+<title>Update Asset</title>
 <div class="container">
 	<div class="row">
 		<div class="panel panel-primary">
@@ -69,7 +69,9 @@
 						Asset</button>
 
 					<c:if test="${not empty errorMessage}">
-						<h4 class="error message">${errorMessage}</h4>
+						<div id="errorMsg">
+							<h4 class="error message">${errorMessage}</h4>
+						</div>
 					</c:if>
 
 				</form:form>

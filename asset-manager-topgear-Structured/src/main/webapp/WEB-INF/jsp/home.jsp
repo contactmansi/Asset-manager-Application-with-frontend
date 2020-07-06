@@ -1,5 +1,6 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
+<title>Asset Manager Home</title>
 <div class="container">
 	<div class="row">
 		<div class="col-md-7 col-md-offset-3 ">
@@ -24,11 +25,13 @@
 						<a class="btn btn-success" id="btnAddAsset" href="/addasset">Add
 							Asset</a>
 					</p>
-					
+
 					<c:if test="${not empty errorMessage}">
-						<h4 class="error message">${errorMessage}</h4>
+						<div id="errorMsg">
+							<h4 class="error message">${errorMessage}</h4>
+						</div>
 					</c:if>
-					
+
 				</div>
 			</div>
 		</div>

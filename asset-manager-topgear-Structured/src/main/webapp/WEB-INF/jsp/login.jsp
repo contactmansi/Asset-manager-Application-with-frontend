@@ -5,7 +5,7 @@
 <html>
 
 <head>
-<title>First Web Application</title>
+<title>Login</title>
 <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
 	rel="stylesheet">
 
@@ -37,10 +37,12 @@
 							class="form-control" required="required" />
 					</fieldset>
 
-					<button type="submit" class="btn btn-success">Login</button>
+					<button id= "btnSignin" type="submit" class="btn btn-success">Login</button>
 
 					<c:if test="${not empty errorMessage}">
-						<h4 class="error message">${errorMessage}</h4>
+						<div id="errorMsg">
+							<h4 class="error message">${errorMessage}</h4>
+						</div>
 					</c:if>
 					
 				</form>

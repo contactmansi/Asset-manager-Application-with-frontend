@@ -62,7 +62,7 @@ public class JPAController {
 	public String login(@ModelAttribute("user") UserDto user) {
 
 		try {
-			HttpStatus response = userService.loginUser(user);
+			userService.loginUser(user);
 		}
 		catch(RuntimeException e) {
 			System.out.println("---- Error from Controller ----");
