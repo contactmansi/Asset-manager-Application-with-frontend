@@ -20,7 +20,7 @@ SpringBoot, Spring MVC, Maven, JPA, h2 database, Hibernate, JSTL, JSP views, Boo
     •	Views: JSP as view and common header, footer, and navigation bar
 
     
-## Endpoints
+## Resource URIs/Endpoints
     • "/login" : User should be able to log into the application using admin/admin as username and password combination --> Login
     
     • "/home" : User should be able to perform Add Employee, Add Asset, View list of assets functionalities from Home page  --> Login -> Home page
