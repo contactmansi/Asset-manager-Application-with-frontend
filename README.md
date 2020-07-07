@@ -1,15 +1,33 @@
 # Asset-manager-Application-with-frontend
 
-## Tech Stack:
+## Tech Stack
 SpringBoot, Spring MVC, Maven, h2 database, hibernate, JSTL, JSP views, BootStrap, CSS3, Html5, Tomcat
 
-## Project Structure:
+## Project Structure
 
-#### Entities: Employee, Asset
-#### Data Transfer Objects (DTOs) : UserDto, AssetDto, EmployeeDto
-#### Service Layer : UserService, AssetService, EmployeeService
-#### Controller : JPAController, ErrorController
-#### Exception Handling: GenericException
+    Entities: Employee, Asset
+    Data Transfer Objects (DTOs) : UserDto, AssetDto, EmployeeDto
+    Service Layer : UserService, AssetService, EmployeeService
+    Controller : JPAController, ErrorController
+    Exception Handling: GenericException
+    
+## Endpoints
+    • "/login" : User should be able to log into the application using admin/admin as username and password combination --> Login
+    
+    • "/home" : User should be able to perform Add Employee, Add Asset, View list of assets functionalities from Home page  --> Login -> Home page
+    
+    • "/addemployee" : User should be able to add an employee and their details --> Home page -> Add employee page
+
+    • "/viewassetlist" : User should be able to search for an employee and be able to view the assets that are tagged to them --> Home page -> View Asset List
+
+    • "/viewassetlist" : User should be able to search for an asset --> Home page -> View Asset List
+
+    • "/addasset" : User should be able to add assets  -->  Home page -> Add Asset
+
+    • "/updateasset" : User should be able to update the assets --> Home page -> View Asset List -> Asset ID
+    
+    • "/logout" : User should be able to logout of the application  -->  Navigation Bar -> Logout
+    
 
 ## Description
 
